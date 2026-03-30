@@ -6,7 +6,7 @@ function App() {
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Nauczyć się podstaw Reacta', done: false },
     { id: 2, text: 'Zrobić pierwszy komponent', done: true },
-    { id: 3, text: 'Dodać własne ', done: false },
+    { id: 3, text: 'Dodać własne zadanie', done: false },
     { id: 4, text: 'Nauczyć się obsługi checkboxa', done: false },
   ])
 
