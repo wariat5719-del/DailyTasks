@@ -34,6 +34,12 @@ function App() {
   setTasks(updatedTasks)
 }
 
+const filteredTasks = tasks.filter((task) => {
+  if (filter === 'active') return !task.done
+  if (filter === 'done') return task.done
+  return true
+})
+
   return (
     <div className="app">
       <div className="container">
@@ -42,6 +48,28 @@ function App() {
         <p className="subtitle">Moja pierwsza aplikacja w React</p>
 
         <div className="task-form">
+        <div className="filters">
+  <button
+    className={filter === 'all' ? 'filter-button active-filter' : 'filter-button'}
+    onClick={() => setFilter('all')}
+  >
+    Wszystkie
+  </button>
+
+  <button
+    className={filter === 'active' ? 'filter-button active-filter' : 'filter-button'}
+    onClick={() => setFilter('active')}
+  >
+    Aktywne
+  </button>
+
+  <button
+    className={filter === 'done' ? 'filter-button active-filter' : 'filter-button'}
+    onClick={() => setFilter('done')}
+  >
+    Wykonane
+  </button>
+</div>
           <input
             type="text"
             placeholder="Dodaj zadanie do wykonania..."
@@ -55,7 +83,7 @@ function App() {
         </div>
 
         <div className="task-list">
-  {tasks.map((task) => (
+  {filteredTasks.map((task) => (
     <div key={task.id} className="task-item">
       <label className="task-label">
         <input
