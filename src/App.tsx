@@ -33,6 +33,10 @@ function App() {
 
   setTasks(updatedTasks)
 }
+  const handleDeleteTask = (id: number) => {
+  const updatedTasks = tasks.filter((task) => task.id !== id)
+  setTasks(updatedTasks)
+}
 
 const filteredTasks = tasks.filter((task) => {
   if (filter === 'active') return !task.done
@@ -82,7 +86,7 @@ const filteredTasks = tasks.filter((task) => {
           </button>
         </div>
 
-        <div className="task-list">
+      <div className="task-list">
   {filteredTasks.map((task) => (
     <div key={task.id} className="task-item">
       <label className="task-label">
@@ -91,8 +95,17 @@ const filteredTasks = tasks.filter((task) => {
           checked={task.done}
           onChange={() => toggleTaskDone(task.id)}
         />
-        <span className={task.done ? 'task-done' : ''}>{task.text}</span>
+        <span className={task.done ? 'task-done' : ''}>
+          {task.text}
+        </span>
       </label>
+
+      <button
+        className="delete-button"
+        onClick={() => handleDeleteTask(task.id)}
+      >
+        🗑️
+      </button>
     </div>
   ))}
 </div>
