@@ -1,41 +1,72 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
+import TaskItem from './componets/TaskItem'
+
+type Task = {
+  id: number
+  text: string
+  done: boolean
+}
 
 function App() {
-  const [taskInput, setTaskInput] = useState('')
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Nauczyć się podstaw Reacta', done: false },
-    { id: 2, text: 'Zrobić pierwszy komponent', done: true },
-    { id: 3, text: 'Dodać własne zadanie', done: false },
-    { id: 4, text: 'Nauczyć się obsługi checkboxa', done: false },
-  ])
+  const [taskInput, setTaskInput] = useState<string>('')
+  const [tasks, setTasks] = useState<Task[]>([])
 
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
 
+  const API_URL = 'http://localhost:3001/tasks'
+
+  const [loading, setLoading] = useState(true)
+
+  const [error, setError] = useState<string | null>(null)
+  
   const handleAddTask = () => {
+  if (taskInput.trim() === '') return
 
-    if (taskInput.trim() === '') return
-
-    const newTask = {
-      id: Date.now(),
-      text: taskInput,
-      done: false,
-    }
-
-    setTasks([...tasks, newTask])
-    setTaskInput('')
+  const newTask = {
+    id: Date.now(),
+    text: taskInput,
+    done: false,
   }
 
-  const toggleTaskDone = (id: number) => {
-  const updatedTasks = tasks.map((task) =>
-    task.id === id ? { ...task, done: !task.done } : task
-  )
+  fetch('http://localhost:3001/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTask),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setTasks([...tasks, data])
+      setTaskInput('')
+    })
+}
 
-  setTasks(updatedTasks)
+  const toggleTaskDone = (id: number) => {
+  const task = tasks.find((t) => t.id === id)
+  if (!task) return
+
+  fetch(`http://localhost:3001/tasks/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ done: !task.done }),
+  }).then(() => {
+    setTasks(
+      tasks.map((t) =>
+        t.id === id ? { ...t, done: !t.done } : t
+      )
+    )
+  })
 }
   const handleDeleteTask = (id: number) => {
-  const updatedTasks = tasks.filter((task) => task.id !== id)
-  setTasks(updatedTasks)
+  fetch(`http://localhost:3001/tasks/${id}`, {
+    method: 'DELETE',
+  }).then(() => {
+    setTasks(tasks.filter((task) => task.id !== id))
+  })
 }
 
 const filteredTasks = tasks.filter((task) => {
@@ -43,6 +74,37 @@ const filteredTasks = tasks.filter((task) => {
   if (filter === 'done') return task.done
   return true
 })
+
+useEffect(() => {
+  fetch('http://localhost:3001/tasks')
+    .then((res) => res.json())
+    .then((data) => {
+      setTasks(data)
+      setLoading(false)
+    })
+    .catch((err) => {
+  console.error(err)
+  setError('Błąd pobierania danych')
+  setLoading(false)
+})
+}, [])
+
+{loading ? (
+  <p>Ładowanie...</p>
+) : (
+  <div className="task-list">
+    {filteredTasks.map((task) => (
+      <TaskItem
+  key={task.id}
+  task={task}
+  onToggle={toggleTaskDone}
+  onDelete={handleDeleteTask}
+/>
+    ))}
+  </div>
+)}
+
+{error && <p>{error}</p>}
 
   return (
     <div className="app">
