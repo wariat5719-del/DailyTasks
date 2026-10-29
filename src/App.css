@@ -1,0 +1,361 @@
+
+/* Główne tło aplikacji */
+.app {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  font-family: Arial, sans-serif;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+/* Główny kontener */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+/* Nagłówek */
+.title {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.description {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* Formularz dodawania zadania */
+.task-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.task-input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.task-input::placeholder {
+  color: #94a3b8;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Przycisk dodawania */
+.add-button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.add-button:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+}
+
+.add-button:active {
+  transform: translateY(0);
+}
+
+/* Lista zadań */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Pojedyncze zadanie */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+  transform: translateY(-2px);
+}
+
+
+/* Tekst ukończonego zadania */
+.task-done {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+/* Etykieta z checkboxem */
+.task-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.task-label input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: #4f46e5;
+  cursor: pointer;
+}
+
+/* Filtry zadań */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.filter-button {
+  padding: 10px 16px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #475569;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.filter-button:hover {
+  background-color: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+.active-filter {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+.active-filter:hover {
+  background-color: #4338ca;
+  color: #ffffff;
+  border-color: #4338ca;
+}
+
+/* Przycisk usuwania */
+.delete-button {
+  flex-shrink: 0;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #fecaca;
+}
+
+/* Widok na telefonach */
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 22px 16px;
+    border-radius: 14px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-input,
+  .add-button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-item {
+    padding: 14px 12px;
+  }
+
+  .filters {
+    gap: 8px;
+  }
+
+  .filter-button {
+    padding: 9px 12px;
+  }
+}
+
+
+/* Sekcja postępu */
+.progress-section {
+  margin: 28px 0;
+  padding: 18px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+
+.progress-caption {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+
+/* Płynna zmiana wyglądu tekstu zadania */
+.task-label span {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Ukończone zadanie */
+.task-label .task-done {
+  color: #94a3b8;
+  opacity: 0.8;
+}
+
+/* Delikatne podświetlenie checkboxa */
+.task-label input {
+  transition: transform 0.15s ease;
+}
+
+.task-label input:hover {
+  transform: scale(1.1);
+}
+
+/* Dostępność: ograniczenie animacji na życzenie systemu */
+@media (prefers-reduced-motion: reduce) {
+  .task-item,
+  .task-label span,
+  .task-label input,
+  .progress-fill,
+  .add-button {
+    transition: none;
+  }
+
+  .task-item:hover,
+  .add-button:hover {
+    transform: none;
+  }
+}
+
+
+.input-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-wrapper .task-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-error {
+  margin: 8px 0 0;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+.task-input[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
+@media (max-width: 600px) {
+  .input-wrapper {
+    width: 100%;
+  }
+}
