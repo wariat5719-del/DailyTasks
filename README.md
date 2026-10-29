@@ -30,26 +30,38 @@ Aplikacja webowa do zarządzania codziennymi zadaniami. Projekt powstał w ramac
 ### Testy
 - Vitest
 
+## Wymagania
+
+- Node.js
+- npm
+- Git
+
 ## Struktura projektu
 
 ```text
 DailyTasks/
 ├── backend/
+│   ├── node_modules/
+│   ├── package.json
+│   ├── package-lock.json
 │   ├── server.js
-│   ├── tasks.json
-│   └── package.json
-├── src/
-│   ├── componets/
-│   │   └── TaskItem.tsx
-│   ├── taskUtils.ts
-│   ├── taskUtils.test.ts
-│   ├── App.tsx
-│   ├── App.css
-│   └── main.tsx
+│   └── tasks.json
 ├── public/
+├── src/
+│   ├── assets/
+│   ├── componets/
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── Text.tsx
+│   ├── taskUtils.ts
+│   └── taskUtils.test.ts
 ├── index.html
 ├── package.json
-└── README.md
+├── package-lock.json
+├── README.md
+└── vite.config.ts
 ```
 
 ## Instalacja i uruchomienie
@@ -62,6 +74,8 @@ cd DailyTasks
 ```
 
 ### 2. Instalacja frontendu
+
+W głównym folderze projektu:
 
 ```bash
 npm install
@@ -76,21 +90,22 @@ npm install
 
 ### 4. Uruchomienie backendu
 
-W folderze `backend`:
+Pozostając w folderze `backend`, uruchom:
 
 ```bash
 node server.js
 ```
 
-Backend działa pod adresem:
+Backend będzie dostępny pod adresem:
 
 `http://localhost:3001`
 
 ### 5. Uruchomienie frontendu
 
-Otwórz drugi terminal w głównym folderze projektu:
+Otwórz drugi terminal i przejdź do głównego folderu projektu:
 
 ```bash
+cd DailyTasks
 npm run dev
 ```
 
@@ -98,9 +113,11 @@ Frontend będzie dostępny pod adresem:
 
 `http://localhost:5173`
 
+**Uwaga:** Backend i frontend muszą działać jednocześnie w dwóch osobnych terminalach.
+
 ## Testy
 
-Uruchomienie testów:
+Aby uruchomić testy:
 
 ```bash
 npm test
@@ -122,4 +139,4 @@ Pliki produkcyjne zostaną wygenerowane w folderze `dist`.
 
 ## Autor
 
-Mateusz Kozłowski – nauka React, TypeScript, CSS i Node.js.
+Mateusz Kozłowski – projekt edukacyjny realizowany w ramach nauki React, TypeScript, CSS i Node.js.
